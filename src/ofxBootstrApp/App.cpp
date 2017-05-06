@@ -16,6 +16,14 @@ void App::setup(){
 
     // calculate time between two frames ("delta-time")
     dt = 1.0f/ofGetFrameRate();
+
+#ifdef OFXBOOTSTRAP_OFXOPERATIONS
+    // operations (text-based in-app console commands)
+    operationsGroup.add(ofxOperations::Generator::generateDefault());
+    operationsGroup.add(ofxOperations::Params::Generator::generateFor(parameters));
+    // the launcher is the "GUI" (text-based overlay) of the operations
+    operationsLauncher.setup(&operationsGroup, true /* auto-draw enabled, no need to call ourselves in our main draw method */);
+#endif
 }
 
 void App::exit(ofEventArgs &args){
@@ -78,4 +86,19 @@ void App::setLogLevel(const string& newLevel){
 
     ofLog() << "Set log level to: " << level;
     ofSetLogLevel(lvl);
+}
+
+//! Process ofxOperations Launcher activation key and drawDebug toggle key.
+void App::keyPressed(int key){
+#ifdef OFXBOOTSTRAP_OFXOPERATIONS
+    if(operationsLauncher.getActive())
+        // let the operations launcher (overlay console) handle the keystrokes
+        return;
+
+    // activate operations launcher
+    if(key == '`'){
+        operationsLauncher.activate();
+        return;
+    }
+#endif
 }
