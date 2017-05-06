@@ -2,6 +2,10 @@
 
 #include "ofMain.h"
 
+#ifdef OFXBOOTSTRAP_OFXOPERATIONS
+    #include "ofxOperations.h"
+#endif
+
 namespace ofxBootstrApp{
     class App : public ofBaseApp {
 
@@ -12,6 +16,9 @@ namespace ofxBootstrApp{
 
         //! Saves parameters
         virtual void exit(ofEventArgs &args);
+
+        //! Activates the ofxOperations launcher GUI
+        virtual void keyPressed(int key);
 
     protected:
 
@@ -40,7 +47,7 @@ namespace ofxBootstrApp{
         //! This parameter is considered case-INsensitive and leading/trailing whitespaces are trimmed.
         virtual void setLogLevel(const string& newLevel);
 
-    protected:
+    protected: // parameters
 
         //! Root parameters container
         ofParameterGroup parameters;
@@ -54,11 +61,17 @@ namespace ofxBootstrApp{
         //! Parameter that holds the filename that logging output should be redirected to
         ofParameter<string> logFileParam;
 
+        //! Parameter that specifies the desired application-wide log-level
         ofParameter<string> logLevelParam;
 
     protected:
 
+        //! Time (in seconds) between frames, used in update routines
         float dt;
 
+#ifdef OFXBOOTSTRAP_OFXOPERATIONS
+        ofxOperations::OperationGroup operationsGroup;
+        ofxOperations::gui::Launcher operationsLauncher;
+#endif
     };
 }
