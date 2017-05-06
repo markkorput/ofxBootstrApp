@@ -72,6 +72,7 @@ namespace ofxBootstrApp{
 #ifdef OFXBOOTSTRAP_OFXOPERATIONS
         ofxOperations::OperationGroup operationsGroup;
         ofxOperations::gui::Launcher operationsLauncher;
+        ofParameter<char> operationsLauncherKeyParam;
 #endif
     };
 }

@@ -51,7 +51,7 @@ void ofApp::exit(ofEventArgs &args){
 
 ### ofxOperations support
 
-To enable the aumatic ofxOperations features you have to define the preprocesser macro:
+To enable the automatic ofxOperations features you have to define the preprocesser macro
 ``` OFXBOOTSTRAP_OFXOPERATIONS ```:
 
 ```
@@ -64,3 +64,7 @@ This way the ofxOperations addon is only required if you explicitly enable it fo
 # addons.make
 ofxOperations
 ```
+
+This will add an ```opertionsGroup``` attribute to your application class that holds all the available application-level operations. This group is populated at setup with common application operations and operations to change the applications params.
+
+It will also add an ```operationsLauncher``` attribute which is in charge of the "GUI" and activated by a keypress, which is by default the tilde (~) but can be configured through the (also added) ```operationsLauncherKeyParam```.

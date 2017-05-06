@@ -37,6 +37,9 @@ void App::setupParameters(){
     parameters.add(logFileParam.set("log-file", ""));
     parameters.add(logLevelParam.set("log-level", ""));
     parameters.add(paramsFileParam.set("params-file", DEFAULT_PARAMS_FILE));
+#ifdef OFXBOOTSTRAP_OFXOPERATIONS
+    parameters.add(operationsLauncherKeyParam.set("operations-launcher-key", '`'));
+#endif
 }
 
 void App::loadParameters(const string& filename){
@@ -96,7 +99,7 @@ void App::keyPressed(int key){
         return;
 
     // activate operations launcher
-    if(key == '`'){
+    if(key == operationsLauncherKeyParam.get()){
         operationsLauncher.activate();
         return;
     }
