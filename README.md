@@ -45,3 +45,22 @@ void ofApp::exit(ofEventArgs &args){
     ofxBootstrApp::App::exit(args);
 }
 ```
+
+
+## Optional features
+
+### ofxOperations support
+
+To enable the aumatic ofxOperations features you have to define the preprocesser macro:
+``` OFXBOOTSTRAP_OFXOPERATIONS ```:
+
+```
+# config.make
+PROJECT_DEFINES = OFXBOOTSTRAP_OFXOPERATIONS
+```
+
+This way the ofxOperations addon is only required if you explicitly enable it for your project. Of course you then need to add the ```ofxOperations``` addon to your project:
+```
+# addons.make
+ofxOperations
+```
